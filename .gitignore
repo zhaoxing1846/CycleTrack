@@ -1,0 +1,25 @@
+# 构建产物
+*.iml
+.gradle/
+/local.properties
+/.idea/
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+
+# 密钥文件
+*.jks
+*.keystore
+*-release-*.jks
+# 密钥配置（如果放在项目中）
+keystore.properties
+
+# 日志
+*.log
+logs/
+
+# 编译产物
+app/build/
+build/
