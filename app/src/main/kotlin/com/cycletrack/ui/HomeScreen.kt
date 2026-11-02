@@ -83,11 +83,9 @@ fun HomeScreen(
                 onPeriodStartToggle = { date ->
                     scope.launch {
                         try {
-                            Logger.log("Period Start: $date")
                             repository.toggleRecord(date, RecordType.PERIOD_START, context)
                             Toast.makeText(context, "✓ 标记经期开始", Toast.LENGTH_SHORT).show()
                         } catch (e: Exception) {
-                            Logger.log("Error: ${e.message}")
                             Toast.makeText(context, "✗ 标记失败", Toast.LENGTH_LONG).show()
                         }
                     }
@@ -95,11 +93,9 @@ fun HomeScreen(
                 onPeriodEndToggle = { date ->
                     scope.launch {
                         try {
-                            Logger.log("Period End: $date")
                             repository.toggleRecord(date, RecordType.PERIOD_END, context)
                             Toast.makeText(context, "✓ 标记经期结束", Toast.LENGTH_SHORT).show()
                         } catch (e: Exception) {
-                            Logger.log("Error: ${e.message}")
                             Toast.makeText(context, "✗ 标记失败", Toast.LENGTH_LONG).show()
                         }
                     }
@@ -107,11 +103,9 @@ fun HomeScreen(
                 onIntimacyToggle = { date ->
                     scope.launch {
                         try {
-                            Logger.log("Intimacy: $date")
                             repository.toggleRecord(date, RecordType.INTIMACY, context)
                             Toast.makeText(context, "✓ 标记亲密", Toast.LENGTH_SHORT).show()
                         } catch (e: Exception) {
-                            Logger.log("Error: ${e.message}")
                             Toast.makeText(context, "✗ 标记失败", Toast.LENGTH_LONG).show()
                         }
                     }
