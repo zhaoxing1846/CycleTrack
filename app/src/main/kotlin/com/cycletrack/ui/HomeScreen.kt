@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
@@ -12,6 +13,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.graphics.Color
 import com.cycletrack.data.CycleRepository
 import com.cycletrack.model.CycleRecord
 import com.cycletrack.model.CycleStats
@@ -39,9 +41,16 @@ fun HomeScreen(
     var showStatsScreen by remember { mutableStateOf(false) }
     
     Scaffold(
+        containerColor = Color(0xFFFFF9F7),
         topBar = {
             TopAppBar(
-                title = { Text("CycleTrack") },
+                title = {
+                    Column {
+                        Text("CycleTrack", style = MaterialTheme.typography.titleLarge, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold)
+                        Text("温柔记录，读懂自己的节奏", style = MaterialTheme.typography.labelMedium,
+                            color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f))
+                    }
+                },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primary,
                     titleContentColor = MaterialTheme.colorScheme.onPrimary
@@ -63,14 +72,22 @@ fun HomeScreen(
                 .fillMaxSize()
                 .padding(padding)
                 .verticalScroll(rememberScrollState())
-                .padding(16.dp)
+            .padding(horizontal = 16.dp, vertical = 18.dp)
         ) {
             // 统计面板
             StatsPanel(stats = stats)
             
             Spacer(modifier = Modifier.height(24.dp))
             
-            Divider()
+            Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                Text("我的日历", style = MaterialTheme.typography.titleLarge,
+                    fontWeight = androidx.compose.ui.text.font.FontWeight.Bold)
+                Spacer(Modifier.weight(1f))
+                androidx.compose.material3.Surface(color = Color(0xFFFFEAF0), shape = RoundedCornerShape(50)) {
+                    Text("点选日期记录", Modifier.padding(horizontal = 11.dp, vertical = 6.dp),
+                        style = MaterialTheme.typography.labelSmall, color = Color(0xFFBD5573))
+                }
+            }
             
             Spacer(modifier = Modifier.height(16.dp))
             
@@ -117,7 +134,7 @@ fun HomeScreen(
             
             // 提示
             Text(
-                text = "💡 提示：分别标记经期开始和结束日期，系统会自动计算天数并预测下次经期",
+                text = "分别标记经期开始与结束，持续记录可让周期趋势更贴近你的实际情况。",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
             )
